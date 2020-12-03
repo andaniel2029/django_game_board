@@ -1,0 +1,47 @@
+{% extends "main.html" %}
+
+
+{% block content %}
+
+<h1>{{ game.name }} (role-playing game)</h1>
+
+
+<h2>{{ game.description }}</h2>
+
+
+<br>
+Published by {{ game.publisher.name }} on {{ game.publication_date }}, {{ game.country }}.
+<br>
+
+Available in the following languages:		
+<ul>
+{% for language in game.languages.all %}
+	<li>{{ language.name }}</li>
+{% endfor %}
+</ul>
+
+Game art:
+<ul>
+{% for game_image in game.gameimage_set.all %}
+	<img src="{{ game_image.image.url }}">
+{% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+	<br>
+	{% if in_collection %}
+		This game is part of your collection!
+	{% else %}
+		<table cellpadding="5" cellspacing="10">
+			<tr height="28">
+				<td width="130" bgcolor="#7A7A7A">
+				  <div align="center"><a href="{% url 'add_collection_item' game.id %}" class="button" id="add_game">
+					  Add to collection</a>
+				  </div>
+				</td>
+		</table>
+	{% endif %}
+{% endif %}
+		
+		 
+{% endblock %}

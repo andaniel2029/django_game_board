@@ -1,0 +1,64 @@
+{% extends "main.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<h1>{{ item.game.name }} is part of {{ enthusiast.username }}'s collection!</h1>
+
+<ul>
+    <li>Has played?
+        {% if item.has_played %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+
+    <li>Currently owns?
+        {% if item.currently_owns %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+
+    <li>Previously owned?
+        {% if item.previously_owned %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+
+    <li>Would sell?
+        {% if item.would_sell %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+
+    <li>Would buy?
+        {% if item.would_buy %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+
+    <li>Would trade?
+        {% if item.would_trade %}
+            <img src="{% static 'community/green_tick.png' %}" style="width:20px;height:20px;">
+        {% else %}
+            <img src="{% static 'community/red_cross.png' %}" style="width:20px;height:20px;">
+        {% endif %}
+    </li>
+</ul>
+
+<br>
+<form action="{% url 'enthusiast_collection_item' enthusiast.id item.id %}" method="post"> {% csrf_token %}
+ <button type="submit" name="remove_item" value="Remove from collection">&nbsp;Remove from collection</button>
+</form>
+
+{% endblock %}

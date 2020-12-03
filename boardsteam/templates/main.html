@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-16le" />
+<title>:: Board Steam ::</title>
+<meta name="Description" content="Board Steam is your board game management solution." />
+<meta name="Keywords" content="board games, game management, game manager, board game manager" />
+<meta name="robots" content="all">
+<meta name="identifier" content="http://www.boardsteam.com">
+<meta name="source" content="http://www.boardsteam.com/index.html">
+<link href="{% static 'community/main.css' %}" rel="stylesheet" type="text/css">
+</head>
+
+<body bgcolor="#FFFFFF">
+<table width="100%">
+  <tr>
+    <td width="150" height="90">
+		<img src="{% static 'community/dice.jpg' %}" width="110" alt="boardsteam" id="logo"/>
+	</td>
+	<td valign="bottom" width="300" align="left">
+		<div class="logo">
+			Board Steam
+		</div>
+	</td>
+	<td valign="top" align="right">
+	</td>
+  </tr>
+</table>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr><center>
+    <td width="333px" bgcolor="#222222">
+
+	</td>
+    <td bgcolor="#222222" valign="top">
+	  <center>
+	  <table cellpadding="5" cellspacing="10">
+	    <tr height="28">
+	      <td width="60" bgcolor="#7A7A7A">
+		    <div align="center"><a href="{% url 'index' %}" class="button" id="pq1">Home</a>
+	        </div></td>
+	      <td width="70" bgcolor="#7A7A7A">
+		    <div align="center"><a href="{% url 'news' %}" class="button" id="pq4">News</a>
+			</div></td>
+		  <td width="65" bgcolor="#7A7A7A">
+		    <div align="center"><a href="{% url 'forum' %}" class="button" id="pq5">Forum</a>
+			</div></td>
+		  <td width="120" bgcolor="#7A7A7A">
+		    <div align="center"><a href="{% url 'support' %}" class="button" id="pq6">FAQ / Support</a>
+			</div></td>
+		{% if user.is_authenticated %}
+            <td width="80" bgcolor="#7A7A7A">
+		      <div align="center"><a href="{% url 'enthusiast_profile' user.id %}" class="button" id="pq2">Profile</a>
+	        </div></td>
+	          <td width="130" bgcolor="#7A7A7A">
+		    <div align="center"><a href="{% url 'enthusiast_collection' user.id %}" class="button" id="pq3">Game collection</a>
+	        </div></td>
+		    <td width="65" bgcolor="#7A7A7A"><div align="center">
+		      <a href="{% url 'logout' %}" class="button" id="logout">Log Out</a>
+		    </div></td>
+        {% else %}
+            <td width="60" bgcolor="#7A7A7A"><div align="center">
+		      <a href="{% url 'login' %}" class="button" id="login">Log In</a>
+		    </div></td>
+	            <td width="75" bgcolor="#7A7A7A"><div align="center">
+		      <a href="{% url 'signup' %}" class="button" id="signup">Sign Up</a>
+		    </div></td>
+		{% endif %}
+	    </tr>
+	  </table>
+	  </center>
+	</td>
+  </center></tr>
+</table>
+<center>
+<br />
+
+<table width="80%">
+  <tr>
+    <td width="70%">
+	 <div class="title"> </div>
+	 <ul class="centralab">
+
+        {% block content %}
+        {% endblock %}
+
+	 </ul>
+    </td>
+  </tr>
+</table>
+
+<br />
+   <img src="{% static 'community/black-line.png' %}" width="80%" height="1" alt="line"/>
+</center>
+<div class="copyright">
+  &copy; 2020 BOARD STEAM. ALL RIGHTS RESERVED.
+</div>
+</body>
+</html>

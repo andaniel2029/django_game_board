@@ -1,0 +1,84 @@
+{% extends '../main.html' %}
+{% load static %}
+{% block content %}
+
+<h1>{{ enthusiast.username }}</h1>
+
+<table width="80%">
+  <tr><td>
+  <div style="width:30%">
+	  <img src="{{enthusiast.avatar.url}}" style="width:150px; height:150px" />
+  </div>
+  </td>
+  <td>
+  <div width="60%" allign="left">
+</br></br>
+Member since: {{ enthusiast.date_joined }}</br></br>
+City: {{ enthusiast.city }}</br></br>
+Country: {{ enthusiast.country }}</br></br>
+
+  </div>
+  </td></tr>
+
+</table>
+</br>
+
+{% if enthusiast.is_authenticated %}
+<table id="private_table" style="width:80%; border:1px solid black; padding: 15px">
+<tr><td>
+<h1>Board Games</h1>
+<ul>
+{% for game in board_games.all %}
+    <li><a href="{% url 'board_game_detail' game.id %}">{{ game.name }}</a></li>
+{% endfor %}
+</ul>
+
+<h1>War Games</h1>
+<ul>
+{% for game in war_games.all %}
+	<li><a href="{% url 'war_game_detail' game.id %}">{{ game.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+<h1>Card Games</h1>
+<ul>
+{% for game in card_games.all %}
+	<li><a href="{% url 'card_game_detail' game.id %}">{{ game.name }}</a></li>
+{% endfor %}
+</ul>
+
+
+<h1>Role-Playing Games</h1>
+<ul>
+{% for game in rpg_games.all %}
+	<li><a href="{% url 'rpg_game_detail' game.id %}">{{ game.name }}</a></li>
+{% endfor %}
+</ul>
+
+</br>
+</br></br>
+
+<table cellpadding="5" cellspacing="10">
+	    <tr height="28">
+	      <td width="60" bgcolor="#7A7A7A">
+		    <div align="center"><a href="/review/" class="button" id="pq1">Review game</a>
+	        </div></td>
+	      <td width="80" bgcolor="#7A7A7A">
+		    <div align="center"><a href="/club/" class="button" id="pq2">Find a club</a>
+	        </div></td>
+	      <td width="130" bgcolor="#7A7A7A">
+		    <div align="center"><a href="/chat/" class="button" id="pq3">Chat user</a>
+	        </div></td>
+	    </tr>
+	  </table>
+
+</td></tr>
+</table>
+{% endif %}
+
+
+</br>
+</br>
+
+{% endblock content %}

@@ -1,0 +1,52 @@
+{% extends "main.html" %}
+{% load static %}
+
+{% block content %}
+
+<table width="80%">
+<tr><td>
+  <div style="width=35%">
+
+	{% if user.is_authenticated %}
+	  Hi {{ user.username }}!
+	  </br>
+	  <img src="{{user.avatar.url}}" style="width:150px; height:150px" />
+	{% else %}
+	  <p>You are not logged in</p>
+	{% endif %}
+  </div>
+</td> <td>
+	<h1>Top Board Games</h1>
+	<ul>
+	{% for game in board_games.all %}	
+	    <li><a href="{% url 'board_game_detail' game.id %}">{{ game.name }}</a></li>
+	{% endfor %}
+	</ul>
+	
+	<h1>Top War Games</h1>
+	<ul>
+	{% for game in war_games.all %}
+		<li><a href="{% url 'war_game_detail' game.id %}">{{ game.name }}</a></li>
+	{% endfor %}
+	</ul>
+	
+	
+	<h1>Top Card Games</h1>
+	<ul>
+	{% for game in card_games.all %}
+		<li><a href="{% url 'card_game_detail' game.id %}">{{ game.name }}</a></li>
+	{% endfor %}
+	</ul>
+	
+	
+	<h1>Top Role-Playing Games</h1>
+	<ul>
+	{% for game in rpg_games.all %}
+		<li><a href="{% url 'rpg_game_detail' game.id %}">{{ game.name }}</a></li>
+	{% endfor %}
+	</ul>
+
+</td></tr>
+</table>
+
+{% endblock %}
